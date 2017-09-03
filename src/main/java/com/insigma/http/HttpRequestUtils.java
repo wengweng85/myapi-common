@@ -56,7 +56,7 @@ public class HttpRequestUtils<T> {
 	public HttpRequestUtils(){
 		jsonConfig=new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
-		this.contentType=ContentType.JSON;
+		this.contentType=ContentType.X_WWW_FORM_URLENCODED;
 	}
     
     /**
@@ -184,12 +184,18 @@ public class HttpRequestUtils<T> {
         try {
             if (null != t) {
             	if(contentType.equals(ContentType.X_WWW_FORM_URLENCODED)){
+            		//post数据
+            		String postdata=toJsonObject(t).toString();
+            		log.info("调用接口"+url+",post数据格式k=v:"+postdata);
             		//解决中文乱码问题
                     StringEntity entity = new StringEntity(parseURLPair(t), "utf-8");
                     entity.setContentEncoding("UTF-8");
                     entity.setContentType("application/x-www-form-urlencoded");
                     httppost.setEntity(entity);
             	}else if(contentType.equals(ContentType.JSON)){
+            		//post数据
+            		String postdata=toJsonObject(t).toString();;
+            		log.info("调用接口"+url+",post数据格式json:"+postdata);
             		//解决中文乱码问题
                     StringEntity entity = new StringEntity(toJsonObject(t).toString(), "utf-8");
                     entity.setContentEncoding("UTF-8");
@@ -209,7 +215,7 @@ public class HttpRequestUtils<T> {
                     /**是否成功*/
                     String success= jsonResult.getString("success");
                     if(success.equals("true")){
-                    	 log.info("调用接口"+url+"成功");
+                    	 //log.info("调用接口"+url+"成功");
                     }else{
                     	 log.info("调用接口"+url+"业务失败,"+jsonResult.getString("message"));
                     	 throw new AppException(jsonResult.getString("message"));
@@ -333,9 +339,8 @@ public class HttpRequestUtils<T> {
 	             Entry<String, Object> e = it.next();  
 	             sb.append(e.getKey()).append("=").append(e.getValue()).append("&");  
 	        }  
-	        System.out.println(sb.toString()+"length="+sb.length());
 	        if(sb.length()>0){
-	        	 System.out.println(sb.toString());
+	        	 System.out.println(sb.deleteCharAt(sb.length()-1).toString());
 	        	 return sb.deleteCharAt(sb.length()-1).toString();  
 	        }else{
 	        	return "";

@@ -77,11 +77,6 @@ public class DemoAc01  extends PageInfo implements java.io.Serializable  {
 		@URL(protocol=,host=, port=,regexp=, flags=)
 	 */
 	
-	
-	private Integer limit=10;
-	private Integer offset=0;
-	
-	
 	private String aac001;
     
 	@NotNull(message="姓名不能为空")
@@ -576,23 +571,5 @@ public class DemoAc01  extends PageInfo implements java.io.Serializable  {
     public void setAae013(String aae013) {
         this.aae013 = aae013 == null ? null : aae013.trim();
     }
-
-	public Integer getLimit() {
-		return limit;
-	}
-
-	public void setLimit(Integer limit) {
-		this.limit = limit;
-	}
-
-	public Integer getOffset() {
-		return offset;
-	}
-
-	public void setOffset(Integer offset) {
-		this.offset = offset;
-	}
-    
-    
     
 }
