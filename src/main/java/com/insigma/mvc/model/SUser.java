@@ -22,7 +22,24 @@ public class SUser extends PageInfo  implements java.io.Serializable {
 	private String groupparentid;
 	private String type;
 	private String isgrant;
+	private String aab301;
+	private String aab301name;
 	
+	
+	
+	
+	public String getAab301name() {
+		return aab301name;
+	}
+	public void setAab301name(String aab301name) {
+		this.aab301name = aab301name;
+	}
+	public String getAab301() {
+		return aab301;
+	}
+	public void setAab301(String aab301) {
+		this.aab301 = aab301;
+	}
 	public String getGroupid() {
 		return groupid;
 	}
